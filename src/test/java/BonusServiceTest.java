@@ -1,3 +1,6 @@
+import org.junit.jupiter.api.Test;
+import ru.netology.javaqa.javaqamvn.services.BonusService;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BonusServiceTest {
@@ -33,6 +36,7 @@ public class BonusServiceTest {
         // производим проверку (сравниваем ожидаемый и фактический):
         assertEquals(expected, actual);
     }
+
     @org.junit.jupiter.api.Test
     void shouldCalculateForUnRegisteredAndUnderLimit() {
         BonusService service = new BonusService();
@@ -41,6 +45,22 @@ public class BonusServiceTest {
         long amount = 1_000;
         boolean registered = false;
         long expected = 10;
+
+        // вызываем целевой метод:
+        long actual = service.calculate(amount, registered);
+
+        // производим проверку (сравниваем ожидаемый и фактический):
+        assertEquals(expected, actual);
+    }
+
+    @org.junit.jupiter.api.Test
+    void shouldCalculateForUnRegisteredAndOverLimit() {
+        BonusService service = new BonusService();
+
+        // подготавливаем данные:
+        long amount = 1_000_600;
+        boolean registered = false;
+        long expected = 500;
 
         // вызываем целевой метод:
         long actual = service.calculate(amount, registered);
